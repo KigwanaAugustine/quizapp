@@ -3,6 +3,7 @@ package com.august.quizapp.models;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,10 +21,11 @@ public class Quiz {
     private Integer id;
     private String title;
 
+    // @JoinTable(
+        //     name = "quiz_questions", 
+        //     joinColumns = @JoinColumn(name = "quiz_id"), 
+        //     inverseJoinColumns = @JoinColumn(name = "question_id"))
     @ManyToMany
-    @JoinTable(
-    name = "quiz_questions", 
-    joinColumns = @JoinColumn(name = "quiz_id"), 
-    inverseJoinColumns = @JoinColumn(name = "question_id"))
     private Set<Question> quizQuestions;
+    
 }

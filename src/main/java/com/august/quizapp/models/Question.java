@@ -36,7 +36,7 @@ public class Question {
 
     private String category;
 
-    @ManyToMany(mappedBy = "quizQuestions")
-    private Set<Quiz> quizzes;
+    // @ManyToMany(mappedBy = "quizQuestions")
+    // private Set<Quiz> quizzes;
 
 }
