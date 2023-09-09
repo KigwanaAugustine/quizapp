@@ -1,6 +1,8 @@
 package com.august.quizapp.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.august.quizapp.daos.QuestionDao;
 import com.august.quizapp.daos.QuizDao;
 import com.august.quizapp.models.Quiz;
+import com.august.quizapp.models.Response;
 import com.august.quizapp.models.Question;
 import com.august.quizapp.models.QuestionWrapper;
 
@@ -62,6 +65,31 @@ public class QuizService {
             return null;
         }
     }
+
+    public Integer calculateScore(Integer id, List<Response> responses) {
+        Quiz quiz = quizDao.findById(id).orElse(null);
+    
+        if (quiz == null || responses.size() != quiz.getQuizQuestions().size()) {
+            // If the quiz is not found or the number of responses doesn't match the number of questions, return null (indicating an error)
+            return null;
+        }
+    
+        int score = 0;
+        List<Question> questions = new ArrayList<>(quiz.getQuizQuestions());
+    
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            Response response = responses.get(i);
+    
+            if (response.getResponse().equals(question.getRightAnswer())) {
+                // If the response matches the correct answer, increment the score
+                score++;
+            }
+        }
+    
+        return score;
+    }
+    
     
 
 }
