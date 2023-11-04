@@ -36,11 +36,9 @@ public class QuizController {
     public ResponseEntity<Set<QuestionWrapper>> getQuiz(@PathVariable Integer id) {
         Set<QuestionWrapper> quiz = quizService.getQuiz(id);
 
-        if (quiz != null) {
-            return ResponseEntity.ok(quiz);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return (quiz != null) 
+            ? ResponseEntity.ok(quiz) 
+            : ResponseEntity.notFound().build();
     }
 
 
@@ -52,11 +50,9 @@ public class QuizController {
 
         Integer score = quizService.calculateScore(id, responses);
 
-        if (score != null) {
-            return ResponseEntity.ok(score);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return (score != null)
+            ? ResponseEntity.ok(score)
+            : ResponseEntity.notFound().build();
     }
 
 

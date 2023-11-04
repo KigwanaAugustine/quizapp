@@ -17,7 +17,7 @@ import com.august.quizapp.models.Question;
 import com.august.quizapp.models.QuestionWrapper;
 
 @Service
-public class QuizService {
+public class QuizService { 
 
     @Autowired
     QuizDao quizDao;
@@ -81,7 +81,7 @@ public class QuizService {
             Question question = questions.get(i);
             Response response = responses.get(i);
     
-            if (response.getResponse().equals(question.getRightAnswer())) {
+            if (response.getResponse().equalsIgnoreCase(question.getRightAnswer())) {
                 // If the response matches the correct answer, increment the score
                 score++;
             }
